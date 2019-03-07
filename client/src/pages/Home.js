@@ -38,7 +38,6 @@ class Home extends Component {
   componentDidMount() {
     this.fetchNotes();
     this.getBackground();
-    // setInterval(this.waterPlant, 600 * 1000)
     setInterval(this.soil, 150 * 1000);
   }
 
@@ -105,7 +104,7 @@ class Home extends Component {
   fetchNotes = () => {
     API.fetchNotes()
       .then(res => {
-        let last = res.data.pop();
+        const last = res.data.pop();
         this.setState({ _id: last._id });
         for (var i = 1; i < last.state.length; i++) {
           const grid = {
@@ -123,9 +122,12 @@ class Home extends Component {
             text: last.state[i].text
           };
           this.setState({ notes: [...this.state.notes, grid] });
+          console.log(this.state.notes)
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err)
+      console.log(this.state.notes)});
   };
 
   onAdd = note => {
@@ -172,11 +174,10 @@ class Home extends Component {
 
   deleteNotefromState = noteId => {
     this.setState({
-      notes: this.state.notes.filter(function(note) {
-        return note.id !== noteId;
-      })
-    });
+      notes: this.state.notes.filter((note) => note.id !== noteId)
+    })
   };
+  
 
   // NOTES //
 
