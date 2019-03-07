@@ -5,6 +5,10 @@ export function Logo(props) {
   return <i style={props.color} className="fas fa-spa logo"></i>
 }
 
+export function Form(props) {
+  return <form autoComplete="off">{props.children}</form>
+}
+
 export function Password(props) {
   return <input type="password" placeholder="Password" {...props}/>
 }

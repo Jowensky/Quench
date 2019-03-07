@@ -6,7 +6,8 @@ import {
   Password,
   Email,
   Inside,
-  Logo
+  Logo,
+  Form
 } from "../components/Login";
 
 class Login extends Component {
@@ -47,18 +48,18 @@ class Login extends Component {
         <Left />
         <Right>
           <Logo color={{ color: this.state.invalidLogin }} />
-
-          <Email
-            value={this.state.eml}
-            onChange={this.handleChange}
-            name="eml"
-          />
-          <Password
-            value={this.state.password}
-            onChange={this.handleChange}
-            name="password"
-          />
-
+          <Form>
+            <Email
+              value={this.state.eml}
+              onChange={this.handleChange}
+              name="eml"
+            />
+            <Password
+              value={this.state.password}
+              onChange={this.handleChange}
+              name="password"
+            />
+          </Form>
           <Inside loginUser={this.loginUser} signUp={this.signUp} />
         </Right>
       </div>

@@ -38,7 +38,7 @@ class Home extends Component {
   componentDidMount() {
     this.fetchNotes();
     this.getBackground();
-    setInterval(this.waterPlant, 600 * 1000)
+    // setInterval(this.waterPlant, 600 * 1000)
     setInterval(this.soil, 150 * 1000);
   }
 
@@ -48,49 +48,48 @@ class Home extends Component {
 
   // Component LIFE CYCLE //
 
-  // Background Color // 
+  // Background Color //
 
   getBackground = () => {
-    API.getbackground() 
-    .then((res) => {
-      const backgroundColor = res.data.pop()
-      document.body.style.backgroundColor = backgroundColor.color
-    })
-    .catch((err) => console.log(err))
-  }
+    API.getbackground()
+      .then(res => {
+        const backgroundColor = res.data.pop();
+        document.body.style.backgroundColor = backgroundColor.color;
+      })
+      .catch(err => console.log(err));
+  };
 
   saveBackground = () => {
     const obj = {
-      color: document.body.style.backgroundColor 
-    }
+      color: document.body.style.backgroundColor
+    };
 
-    API.savebackground(obj).catch((err) => console.log(err))
-  }
+    API.savebackground(obj).catch(err => console.log(err));
+  };
 
-  backgroundColor = (event) => {
-    switch(event){
-      case 'green':
-      document.body.style.backgroundColor = 'rgb(196, 206, 196)'
-      break;
-      case 'yellow':
-      document.body.style.backgroundColor = 'rgb(144, 144, 41)'
-      break;
-      case 'grey':
-      document.body.style.backgroundColor = '#666'
-      break;
-      case 'pink':
-      document.body.style.backgroundColor = '#eec9d2'
-      break;
+  backgroundColor = event => {
+    switch (event) {
+      case "green":
+        document.body.style.backgroundColor = "rgb(196, 206, 196)";
+        break;
+      case "yellow":
+        document.body.style.backgroundColor = "rgb(144, 144, 41)";
+        break;
+      case "grey":
+        document.body.style.backgroundColor = "#666";
+        break;
+      case "pink":
+        document.body.style.backgroundColor = "#eec9d2";
+        break;
       default:
-      document.body.style.backgroundColor = 'rgb(196, 206, 196)'
+        document.body.style.backgroundColor = "rgb(196, 206, 196)";
     }
 
-    this.saveBackground()
-  }
+    this.saveBackground();
+  };
 
   // BackgroundColor
 
-  
   // Sketch on Background //
 
   write = () => {
@@ -101,37 +100,35 @@ class Home extends Component {
 
   // Sketch on Background //
 
-
   // NOTES //
 
   fetchNotes = () => {
     API.fetchNotes()
-    .then((res) => {
-      let last = res.data.pop()
-      this.setState({ _id: last._id })
-      for (var i=1; i < last.state.length; i++) {
-        const grid = {
-          grid: {
-            x: last.state[i].grid.x,
-            y: last.state[i].grid.y,
-            w: last.state[i].grid.w,
-            h: last.state[i].grid.h,
-            i: last.state[i].grid.i
-          },
-          color: last.state[i].color,
-          id: last.state[i].id,
-          timeStamp: last.state[i].timeStamp,
-          title: last.state[i].title,
-          text: last.state[i].text
-        };
-        this.setState({ notes: [...this.state.notes, grid] });
-      }
-    })
-    .catch((err) => console.log(err));
-  }
+      .then(res => {
+        let last = res.data.pop();
+        this.setState({ _id: last._id });
+        for (var i = 1; i < last.state.length; i++) {
+          const grid = {
+            grid: {
+              x: last.state[i].grid.x,
+              y: last.state[i].grid.y,
+              w: last.state[i].grid.w,
+              h: last.state[i].grid.h,
+              i: last.state[i].grid.i
+            },
+            color: last.state[i].color,
+            id: last.state[i].id,
+            timeStamp: last.state[i].timeStamp,
+            title: last.state[i].title,
+            text: last.state[i].text
+          };
+          this.setState({ notes: [...this.state.notes, grid] });
+        }
+      })
+      .catch(err => console.log(err));
+  };
 
   onAdd = note => {
-    
     const grid = {
       grid: {
         x: note.grid.x,
@@ -149,7 +146,7 @@ class Home extends Component {
       timeStamp: note.timeStamp,
       title: note.title
     };
-    console.log(grid)
+
     this.setState({ notes: [...this.state.notes, grid] });
   };
 
@@ -158,19 +155,28 @@ class Home extends Component {
   saveNotes = () => {
     const obj = {
       state: this.state.notes
-    }
+    };
 
     API.saveNotes(obj).catch(err => console.log(err));
   };
 
-  onDelete = (event) => {
+  onDelete = event => {
     const obj = {
       note: event.id,
       mongo: this.state._id
-    }
+    };
+    this.deleteNotefromState(event.id);
+    
+    API.deleteNote(obj).catch(err => console.log(err));
+  };
 
-    API.deleteNote(obj).catch((err) => console.log(err))
-  }
+  deleteNotefromState = noteId => {
+    this.setState({
+      notes: this.state.notes.filter(function(note) {
+        return note.id !== noteId;
+      })
+    });
+  };
 
   // NOTES //
 
@@ -198,7 +204,7 @@ class Home extends Component {
     const obj = {
       title: "Has Watered"
     };
-    
+
     API.timeWatered(obj).catch(err => console.log(err));
   };
 
@@ -217,7 +223,6 @@ class Home extends Component {
 
   // Watering Plant //
 
-
   // Log Out //
 
   logOut = () => {
@@ -225,7 +230,6 @@ class Home extends Component {
   };
 
   // Log Out //
-
 
   render() {
     let test = this.state.dates.length ? this.state.date.join("<br/>") : "";

@@ -59,10 +59,15 @@ input[type=password], input[type=email] {
 #signup {
   font-size: 15px;
   position: fixed;
-  margin-top: 75%;
+  margin-top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-transform: uppercase;
+  transition: color .5s;
+}
+
+#signup:hover {
+  color: #c1e5f3
 }
 
 #signup:hover, #login {
