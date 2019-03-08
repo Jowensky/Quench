@@ -49,6 +49,7 @@ class Home extends Component {
 
   // Background Color //
 
+  // API call to mongoDB retrieving latest saved backgroundColor
   getBackground = () => {
     API.getbackground()
       .then(res => {
@@ -91,6 +92,7 @@ class Home extends Component {
 
   // Sketch on Background //
 
+  // Toggle Pencil and Editor tool"
   write = () => {
     this.state.sketchTool === Tools.Pencil
       ? this.setState({ sketchTool: Tools.Select })
@@ -101,12 +103,15 @@ class Home extends Component {
 
   // NOTES //
 
+  // API call to Mongo retrieving latest notes save
   fetchNotes = () => {
     API.fetchNotes()
       .then(res => {
+        // Retrieving latest saved notes in mongo object array
         const last = res.data.pop();
         this.setState({ _id: last._id });
         for (var i = 1; i < last.state.length; i++) {
+          // Response turned to object to be set in the State
           const grid = {
             grid: {
               x: last.state[i].grid.x,
@@ -130,8 +135,10 @@ class Home extends Component {
       console.log(this.state.notes)});
   };
 
+  // Adding notes to the state
   onAdd = note => {
     const grid = {
+      // Event turned to object to be set in the state
       grid: {
         x: note.grid.x,
         y: note.grid.y,
@@ -154,6 +161,7 @@ class Home extends Component {
 
   noteUpdate = () => {};
 
+  // API to save notes to mongo
   saveNotes = () => {
     const obj = {
       state: this.state.notes
@@ -162,6 +170,7 @@ class Home extends Component {
     API.saveNotes(obj).catch(err => console.log(err));
   };
 
+  // Deleting notes from Mongo
   onDelete = event => {
     const obj = {
       note: event.id,
@@ -172,17 +181,19 @@ class Home extends Component {
     API.deleteNote(obj).catch(err => console.log(err));
   };
 
+  // Deleting notes from State
   deleteNotefromState = noteId => {
     this.setState({
       notes: this.state.notes.filter((note) => note.id !== noteId)
     })
-  };
+    };
   
 
   // NOTES //
 
   // Watering Plant //
 
+  // API call to check moisture of Soil
   soil = () => {
     API.isPlantDry().then(response => {
       switch (response.data) {
@@ -198,6 +209,7 @@ class Home extends Component {
     });
   };
 
+  // API call to water plant
   waterPlant = () => {
     API.waterPlant().catch(err => console.log(err));
     this.soil();
@@ -207,13 +219,15 @@ class Home extends Component {
     };
 
     API.timeWatered(obj).catch(err => console.log(err));
-  };
+  };  
 
+  // Retrieving dates of when Plant was watered
   getDates = () => {
     API.getDates()
       .then(({ data }) => {
         const _Dates = [];
         data.forEach(day => {
+          // Formatting dates
           const num = moment(day.date).format("MM-DD-YYYY");
           _Dates.push(num);
         });

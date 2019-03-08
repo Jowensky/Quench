@@ -17,6 +17,7 @@ class Login extends Component {
     invalidLogin: ""
   };
 
+  // Firebase SignUP
   signUp = event => {
     event.preventDefault();
     fire
@@ -25,6 +26,7 @@ class Login extends Component {
       .catch(err => console.log(err));
   };
 
+  // Firebase Login
   loginUser = event => {
     event.preventDefault();
     fire
