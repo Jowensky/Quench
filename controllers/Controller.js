@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the booksController
+// Defining methods for the WaterController
 module.exports = {
   findAll: function(req, res) {
     db.Water
@@ -24,15 +24,16 @@ module.exports = {
         res.status(422).json(err)
       });
   },
-  findAllNotes: function(req, res) {
-    db.Note
-      .find(req.query)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
   findNoteById: function(req, res) {
     db.Water
       .findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  // Defining methods for the NoteController
+  findAllNotes: function(req, res) {
+    db.Note
+      .find(req.query)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -54,6 +55,7 @@ module.exports = {
       .then(function(dbModel) {res.json(dbModel)})
       .catch(function(err) {res.status(422).json(err)})
   },
+    // Defining methods for the BackgroundController
   createBackground: function(req, res) {
     db.Background
       .create(req.body)

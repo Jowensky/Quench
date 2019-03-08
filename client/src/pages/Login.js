@@ -39,6 +39,9 @@ class Login extends Component {
   };
 
   handleChange = event => {
+
+     // Destructure the name and value properties off of event.target
+    // Update the appropriate state
     const { name, value } = event.target;
 
     this.setState({ [name]: value });
