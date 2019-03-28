@@ -23,7 +23,6 @@ class Login extends Component {
     fire
       .auth()
       .createUserWithEmailAndPassword(this.state.eml, this.state.password)
-      .catch(err => console.log(err));
   };
 
   // Firebase Login
@@ -32,15 +31,14 @@ class Login extends Component {
     fire
       .auth()
       .signInWithEmailAndPassword(this.state.eml, this.state.password)
-      .catch(err => {
+      .catch(() => {
         this.setState({ invalidLogin: "red" });
-        console.log(err);
       });
   };
 
   handleChange = event => {
 
-     // Destructure the name and value properties off of event.target
+    // Destructure the name and value properties off of event.target
     // Update the appropriate state
     const { name, value } = event.target;
 

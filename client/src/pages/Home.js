@@ -49,14 +49,12 @@ class Home extends Component {
 
   // Background Color //
 
-  // API call to mongoDB retrieving latest saved backgroundColor
   getBackground = () => {
     API.getbackground()
       .then(res => {
         const backgroundColor = res.data.pop();
         document.body.style.backgroundColor = backgroundColor.color;
       })
-      .catch(err => console.log(err));
   };
 
   saveBackground = () => {
@@ -64,7 +62,7 @@ class Home extends Component {
       color: document.body.style.backgroundColor
     };
 
-    API.savebackground(obj).catch(err => console.log(err));
+    API.savebackground(obj)
   };
 
   backgroundColor = event => {
@@ -127,12 +125,8 @@ class Home extends Component {
             text: last.state[i].text
           };
           this.setState({ notes: [...this.state.notes, grid] });
-          console.log(this.state.notes)
         }
       })
-      .catch(err => {
-        console.log(err)
-      console.log(this.state.notes)});
   };
 
   // Adding notes to the state
@@ -167,7 +161,7 @@ class Home extends Component {
       state: this.state.notes
     };
 
-    API.saveNotes(obj).catch(err => console.log(err));
+    API.saveNotes(obj)
   };
 
   // Deleting notes from Mongo
@@ -178,7 +172,7 @@ class Home extends Component {
     };
     this.deleteNotefromState(event.id);
     
-    API.deleteNote(obj).catch(err => console.log(err));
+    API.deleteNote(obj)
   };
 
   // Deleting notes from State
@@ -211,14 +205,14 @@ class Home extends Component {
 
   // API call to water plant
   waterPlant = () => {
-    API.waterPlant().catch(err => console.log(err));
+    API.waterPlant()
     this.soil();
 
     const obj = {
       title: "Has Watered"
     };
 
-    API.timeWatered(obj).catch(err => console.log(err));
+    API.timeWatered(obj)
   };  
 
   // Retrieving dates of when Plant was watered
@@ -233,7 +227,6 @@ class Home extends Component {
         });
         this.setState({ dates: _Dates });
       })
-      .catch(err => console.log(err));
   };
 
   // Watering Plant //
