@@ -1,12 +1,14 @@
 import firebase from "firebase";
 
 const config = {
-  apiKey: "AIzaSyA7FX5hrEStDVQQVmFeuT6eGLnhAE1Vv_I",
-  authDomain: "plantwater-60d84.firebaseapp.com",
-  databaseURL: "https://plantwater-60d84.firebaseio.com",
-  projectId: "plantwater-60d84",
-  storageBucket: "plantwater-60d84.appspot.com",
-  messagingSenderId: "123494582330"
+  apiKey: "AIzaSyCDkQEG2X82na5YtN5ps6AWUOJbxSUQA8o",
+  authDomain: "quench-60887.firebaseapp.com",
+  databaseURL: "https://quench-60887.firebaseio.com",
+  projectId: "quench-60887",
+  storageBucket: "quench-60887.appspot.com",
+  messagingSenderId: "738912737991"
 };
 const fire = firebase.initializeApp(config);
 export default fire;
+
+
