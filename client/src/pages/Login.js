@@ -23,6 +23,9 @@ class Login extends Component {
     fire
       .auth()
       .createUserWithEmailAndPassword(this.state.eml, this.state.password)
+      .catch(() => {
+        this.setState({ invalidLogin: "red" });
+      });
   };
 
   // Firebase Login
