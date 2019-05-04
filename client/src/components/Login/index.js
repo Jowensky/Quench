@@ -10,7 +10,7 @@ export function Form(props) {
 }
 
 export function Password(props) {
-  return <input type="password" placeholder="Password" {...props}/>
+  return <input type="password" placeholder="Password(6)" {...props}/>
 }
 
 export function Email(props) {

@@ -47,6 +47,11 @@ input[type=password], input[type=email] {
   margin-bottom: 12px; 
 }
 
+input::placeholder {
+  font-size: 15px;
+  padding-left: 4px;
+}
+
 #login {
   background-color: rgba(0, 0, 0, 0.8);
   color: rgb(143, 143, 143);
