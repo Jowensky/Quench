@@ -10,3 +10,7 @@ Automated Watering Plant app
 - Express - Node
 - MongoDB
 - React
+- Firebase Authentication
+
+# Deployment
+https://murmuring-beach-11714.herokuapp.com/
